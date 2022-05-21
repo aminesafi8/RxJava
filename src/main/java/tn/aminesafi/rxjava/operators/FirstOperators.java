@@ -1,4 +1,4 @@
-package tn.aminesafi.rxjava;
+package tn.aminesafi.rxjava.operators;
 
 import io.reactivex.rxjava3.core.Observable;
 
