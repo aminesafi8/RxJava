@@ -30,6 +30,19 @@ public class RxController {
 
         GenericObserver<Todo> observer = new GenericObserver<>();
         observable.subscribe(observer);
+    }
 
+    @GetMapping("lazy")
+    public void lazyObservable() {
+        // lazy observable
+        val todos = restTemplate.getForObject("https://jsonplaceholder.typicode.com/todos", Todo[].class);
+        Observable<Todo[]> observable = Observable.fromCallable(() -> {
+
+            int x = 9 / 0; // code getting executed only when the observer subscribe and execute the onError() callback
+            return todos;
+        });
+
+        GenericObserver<Todo[]> observer = new GenericObserver<>();
+        observable.subscribe(observer);
     }
 }
